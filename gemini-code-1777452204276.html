@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三義木雕 - 文化與藝術的數位交匯</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS 變數定義：木質調與現代簡約色彩 */
+        :root {
+            --wood-dark: #3E2723;   /* 深木色 */
+            --wood-primary: #5D4037; /* 經典木色 */
+            --wood-light: #8D6E63;  /* 淺木色 */
+            --bg-cream: #F9F6F0;    /* 米白背景 */
+            --accent-gold: #BCAAA4; /* 點綴色 */
+            --text-main: #2C2C2C;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        /* 導覽列 */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(249, 246, 240, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--wood-dark);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--wood-primary);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--wood-light);
+        }
+
+        /* 首頁主視覺 */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(249, 246, 240, 0.8), rgba(249, 246, 240, 0.8)), url('https://images.unsplash.com/photo-1611079830811-865ff4428d17?auto=format&fit=crop&w=1920&q=80') center/cover;
+            padding: 0 20px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            color: var(--wood-dark);
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: var(--wood-primary);
+            margin-bottom: 40px;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            background-color: var(--wood-primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: var(--wood-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(93, 64, 55, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--wood-primary);
+            color: var(--wood-primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--wood-primary);
+            color: white;
+        }
+
+        /* 區塊通用設定 */
+        section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--wood-dark);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-gold);
+            margin: 15px auto 0;
+        }
+
+        /* 商品與藝術品商城 (E-Shop) */
+        .shop-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .product-img {
+            height: 250px;
+            background-color: #EFEBE4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--wood-light);
+            font-size: 0.9rem;
+            /* 實際專案請替換為真實木雕照片 */
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+        .category-tag {
+            font-size: 0.8rem;
+            color: var(--wood-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            color: var(--wood-dark);
+            margin-bottom: 15px;
+        }
+
+        /* AI RAG 模擬按鈕 */
+        .ai-rag-btn {
+            width: 100%;
+            padding: 10px;
+            background: rgba(93, 64, 55, 0.05);
+            border: 1px solid var(--accent-gold);
+            color: var(--wood-primary);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .ai-rag-btn:hover {
+            background: var(--wood-primary);
+            color: white;
+        }
+
+        /* OMO 體驗區塊 */
+        .omo-section {
+            background: var(--wood-dark);
+            color: white;
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .omo-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .omo-section p {
+            color: #D7CCC8;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .qr-placeholder {
+            width: 120px;
+            height: 120px;
+            background: white;
+            margin: 0 auto 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            font-size: 0.8rem;
+        }
+
+        /* 浮動 Chatbot / 導購按鈕 */
+        .chatbot-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--wood-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .chatbot-fab:hover {
+            transform: scale(1.1);
+            background-color: var(--wood-dark);
+        }
+
+        /* AI 故事 Modal (彈出視窗) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--bg-cream);
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--wood-light);
+        }
+
+        /* 動畫 */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 手機版 RWD */
+        @media (max-width: 768px) {
+            .nav-links { display: none; /* 實務上可改為漢堡選單 */ }
+            header h1 { font-size: 2.2rem; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo serif">三義木雕 SANYI</div>
+        <div class="nav-links">
+            <a href="#home">首頁</a>
+            <a href="#shop">線上商城</a>
+            <a href="#omo">實體體驗預約</a>
+        </div>
+    </nav>
+
+    <header id="home">
+        <h1 class="serif">刻劃時光，傳承近九十年的客家工藝</h1>
+        <p>將理性需求與感性體驗結合，為您呈獻具備故事性、文化關聯與藝術價值的木雕美學。</p>
+        <div style="display: flex; gap: 15px;">
+            <a href="#shop" class="btn">探索典藏藝品</a>
+            <a href="#omo" class="btn btn-outline">預約 DIY 體驗</a>
+        </div>
+    </header>
+
+    <section id="shop">
+        <h2 class="section-title">數位藝廊與生活文創</h2>
+        <div class="shop-grid">
+            
+            <div class="product-card">
+                <div class="product-img">
+                    [ 圖片：大洞聚寶盆 示意圖 ]
+                </div>
+                <div class="product-info">
+                    <span class="category-tag">開運聚寶盆區</span>
+                    <h3 class="product-title serif">綠檀香大洞聚寶盆</h3>
+                    <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem;">保留原木紋理，可放置水晶或招財錢母，散發天然靜謐香氣。</p>
+                    <button class="ai-rag-btn" onclick="openAIModal('綠檀香大洞聚寶盆', '這件聚寶盆選用南美洲進口的頂級綠檀木。在三義在地老師傅的巧手下，順應木材天然的紋理進行車製。綠檀木在客家風水文化中象徵「生生不息」，其色澤會隨時間氧化轉為墨綠，猶如會呼吸的藝術品。')">
+                        ✦ AI 沉浸式文化解析
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">
+                    [ 圖片：文昌筆 示意圖 ]
+                </div>
+                <div class="product-info">
+                    <span class="category-tag">風水與擺飾區</span>
+                    <h3 class="product-title serif">台灣龍柏文昌筆</h3>
+                    <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem;">精雕細琢，寓意步步高升，適合高階經理人或書房典藏。</p>
+                    <button class="ai-rag-btn" onclick="openAIModal('台灣龍柏文昌筆', '龍柏生長緩慢，木質堅硬且帶有獨特辛香。早期三義木雕外銷時期，龍柏常被用來製作高級裝飾。此件文昌筆結合了傳統科舉文化中的「文曲星」意象，透過師傅細膩的刀法，展現出祈求智慧與功名的深遠關聯性。')">
+                        ✦ AI 沉浸式文化解析
+                    </button>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-img">
+                    [ 圖片：彩繪木鴨 示意圖 ]
+                </div>
+                <div class="product-info">
+                    <span class="category-tag">生活實用與文創區</span>
+                    <h3 class="product-title serif">森林小精靈彩繪木鴨</h3>
+                    <p style="color: #666; margin-bottom: 20px; font-size: 0.95rem;">結合生活實用性的文創小物，適合作為伴手禮或親子同樂素材。</p>
+                    <button class="ai-rag-btn" onclick="openAIModal('森林小精靈彩繪木鴨', '三義木雕不只有神像！這款木鴨見證了三義從傳統木雕轉向現代文創的歷程。透過保留木頭的原色與提供DIY彩繪空間，我們希望讓年輕世代能親手觸摸木材的溫度，創造屬於自己的在地記憶。')">
+                        ✦ AI 沉浸式文化解析
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="omo">
+        <div class="omo-section">
+            <h2 class="serif">從線上瀏覽 到 實地體驗</h2>
+            <p>解決 Webrooming，我們誠摯邀請您親臨三義客家庄，感受木材真實的香氣與木雕博物館的震撼。</p>
+            <div class="qr-placeholder">
+                模擬 QR Code<br>(掃描領取優惠)
+            </div>
+            <p style="font-size: 0.9rem; margin-bottom: 20px;">出示此憑證，可於三義實體門市兌換「來店打卡禮」或享有 DIY 體驗專屬折扣。</p>
+            <a href="#" class="btn" style="background-color: white; color: var(--wood-dark);">預約實體店面 / DIY 活動</a>
+        </div>
+    </section>
+
+    <div class="chatbot-fab" title="24小時智能客服 (GOSU BAR 架構)">
+        💬
+    </div>
+
+    <div class="modal" id="aiModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAIModal()">&times;</span>
+            <span class="category-tag">Retrieval-Augmented Generation</span>
+            <h3 class="serif" id="modalTitle" style="font-size: 1.8rem; margin: 10px 0 20px; color: var(--wood-dark);">商品名稱</h3>
+            <p id="modalContent" style="color: #444; line-height: 1.8;">
+                這裡將動態載入 AI 生成的歷史故事、木材特性與在地文化意涵...
+            </p>
+            <div style="margin-top: 30px; border-top: 1px solid #ddd; padding-top: 20px;">
+                <p style="font-size: 0.85rem; color: #888;">*透過您的瀏覽行為，系統已自動為您貼上「文化愛好者」標籤，未來將推薦更多專屬您的木雕藝品。</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // AI Modal 互動邏輯 (模擬 RAG 檢索生成體驗)
+        const modal = document.getElementById('aiModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+
+        function openAIModal(title, story) {
+            modalTitle.innerText = title;
+            modalContent.innerText = story;
+            modal.style.display = 'flex';
+            // 加上淡入動畫
+            modal.style.animation = 'fadeInUp 0.3s ease-out';
+        }
+
+        function closeAIModal() {
+            modal.style.display = 'none';
+        }
+
+        // 點擊 Modal 背景關閉視窗
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeAIModal();
+            }
+        }
+
+        // Chatbot 點擊互動 (模擬對話式商務)
+        document.querySelector('.chatbot-fab').addEventListener('click', function() {
+            alert('【系統模擬】啟動 LINE OA / Chatbot 介面。在此可進行 24 小時客服、自動推播品牌故事或派發三義木雕節集章任務。');
+        });
+    </script>
+</body>
+</html>

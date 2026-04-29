@@ -1,0 +1,21 @@
+{
+  "name": "三義木雕文化平台",
+  "short_name": "三義木雕",
+  "description": "三義木雕電子商務與文化入口平台",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#F9F6F0",
+  "theme_color": "#5D4037",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3604/3604169.png", 
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3604/3604169.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
